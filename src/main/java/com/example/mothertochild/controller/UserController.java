@@ -3,6 +3,8 @@ package com.example.mothertochild.controller;
 import com.example.mothertochild.entity.User;
 import com.example.mothertochild.service.impl.UserServiceImpl;
 import com.example.mothertochild.util.JsonResult;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -67,34 +69,22 @@ public class UserController {
     public JsonResult insert(@RequestParam String username, @RequestParam String password) {
         User user = new User(username,password);
         System.out.println("username:" + username);
-        int row = userService.insertUser(user);
+        int row = userService.addUser(user);
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
             jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
+            jsonResult.setValue(user);
         }
         return jsonResult;
     }
 
-    @ApiOperation(value = "查询所有")
-    @GetMapping("/users")
-    private JsonResult  userList(){
-        List<User> userLists = userService.userList();
-        JsonResult jsonResult = new JsonResult();
-        if (userLists != null && userLists.size() > 0) {
-            jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
-            jsonResult.setMessage("成功");
-            jsonResult.setValue(userLists);
-        }
-        return jsonResult;
-    }
 
     @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
     @GetMapping("/user/{username}")
     @ApiImplicitParam(paramType = "query",name = "username",value = "用户名",required = true,dataType = "String")
-    public JsonResult  ListUserByName( @RequestParam String username){
+    public JsonResult  findUserByName( @RequestParam String username){
         System.out.println("username" + username);
         User user = userService.findByName(username);
         JsonResult jsonResult = new JsonResult();
@@ -106,4 +96,51 @@ public class UserController {
         }
         return jsonResult;
     }
+    @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
+    @GetMapping("/user/{userId}")
+    @ApiImplicitParam(paramType = "query",name = "userId",value = "用户id",required = true,dataType = "int")
+    public JsonResult  getUser( @RequestParam int userId){
+        User user = userService.getUser(userId);
+        JsonResult jsonResult = new JsonResult();
+        if (user != null) {
+            jsonResult.setCode(200);
+            jsonResult.setSuccess("true");
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(user);
+        }
+        return jsonResult;
+    }
+
+    @ApiOperation(value = "分页查询")
+    @GetMapping("/users")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query",name = "pageNum",value = "当前页面",required = true,dataType = "int"),
+            @ApiImplicitParam(paramType = "query",name = "pageSize",value = "一页大小",required = true,dataType = "int")
+    })
+    public JsonResult getUserList(@RequestParam int pageNum, @RequestParam int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        Page<User>  userList = userService.userList();
+        JsonResult jsonResult = new JsonResult();
+        if (userList != null && userList.size() > 0) {
+            jsonResult.setCode(200);
+            jsonResult.setSuccess("true");
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(userList);
+        }
+        return jsonResult;
+    }
+
+//    @ApiOperation(value = "查询所有")
+//    @GetMapping("/users")
+//    private JsonResult  userList(){
+//        List<User> userLists = userService.userList();
+//        JsonResult jsonResult = new JsonResult();
+//        if (userLists != null && userLists.size() > 0) {
+//            jsonResult.setCode(200);
+//            jsonResult.setSuccess("true");
+//            jsonResult.setMessage("成功");
+//            jsonResult.setValue(userLists);
+//        }
+//        return jsonResult;
+//    }
 }

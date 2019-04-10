@@ -3,6 +3,8 @@ package com.example.mothertochild.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -15,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class DruidConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean

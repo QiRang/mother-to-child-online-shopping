@@ -3,6 +3,7 @@ package com.example.mothertochild.service.impl;
 import com.example.mothertochild.entity.User;
 import com.example.mothertochild.mapper.UserMapper;
 import com.example.mothertochild.service.UserService;
+import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,26 +17,25 @@ public class UserServiceImpl implements UserService {
         return userMapper.findUserByName(username);
     }
 
-//    @Override
-//    public int insertUser(String username, String password) {
-//        System.out.println("password:" + password);
-//        return userMapper.insertUser(username, password);
-//    }
-
     @Override
-    public int updatePassword(int id, String password, String NewPassword) {
-        return userMapper.updateUser(id,password,NewPassword);
+    public User getUser(int userId) {
+        return null;
     }
 
     @Override
-    public int insertUser(User user) {
+    public int updatePassword(int userId, String password, String newPassword) {
+        return userMapper.updatePassword(userId,password, newPassword);
+    }
+
+    @Override
+    public int addUser(User user) {
         String q = user.getPassword();
         System.out.println("password:" + q);
-        return userMapper.insertUser(user);
+        return userMapper.addUser(user);
     }
 
     @Override
-    public List<User> userList() {
+    public Page<User>  userList() {
         return userMapper.userList();
     }
 
@@ -43,4 +43,5 @@ public class UserServiceImpl implements UserService {
     public int deleteUser(int id) {
         return userMapper.deleteUser(id);
     }
+
 }
