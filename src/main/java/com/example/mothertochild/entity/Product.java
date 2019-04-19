@@ -1,37 +1,38 @@
 package com.example.mothertochild.entity;
 
+import io.swagger.annotations.ApiModel;
+
 import java.util.Date;
 
+@ApiModel(value="商品对象模型")
 public class Product {
 
     //非数据库字段,产品和分类是多对一
     private Category category;
 
-    //非数据库字段
-    private ProductImage firstProductImage;
+    //数据库字段
+    private String productImage;
 
-    private Integer id;
+    private Integer productId;
 
-    private String name;
+    private String productName;
 
-    private String subTitle;
+    private String describe;
 
-    private Float originalPrice;
-
-    private Float promotePrice;
+    private Float price;
 
     private Integer stock;
 
-    private Integer cid;
+    private Integer categoryId;
 
     private Date createDate;
 
-    public ProductImage getFirstProductImage() {
-        return firstProductImage;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public void setFirstProductImage(ProductImage firstProductImage) {
-        this.firstProductImage = firstProductImage;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     public Category getCategory() {
@@ -42,46 +43,6 @@ public class Product {
         this.category = category;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getSubTitle() {
-        return subTitle;
-    }
-
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle == null ? null : subTitle.trim();
-    }
-
-    public Float getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(Float originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public Float getPromotePrice() {
-        return promotePrice;
-    }
-
-    public void setPromotePrice(Float promotePrice) {
-        this.promotePrice = promotePrice;
-    }
-
     public Integer getStock() {
         return stock;
     }
@@ -90,13 +51,6 @@ public class Product {
         this.stock = stock;
     }
 
-    public Integer getCid() {
-        return cid;
-    }
-
-    public void setCid(Integer cid) {
-        this.cid = cid;
-    }
 
     public Date getCreateDate() {
         return createDate;
@@ -106,18 +60,57 @@ public class Product {
         this.createDate = createDate;
     }
 
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "category=" + category +
-                ", firstProductImage=" + firstProductImage +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", subTitle='" + subTitle + '\'' +
-                ", originalPrice=" + originalPrice +
-                ", promotePrice=" + promotePrice +
+                ", firstProductImage=" + productImage +
+                ", productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", describe='" + describe + '\'' +
+                ", price=" + price +
                 ", stock=" + stock +
-                ", cid=" + cid +
+                ", categoryId=" + categoryId +
                 ", createDate=" + createDate +
                 '}';
     }

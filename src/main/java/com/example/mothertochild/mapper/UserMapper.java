@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper //指定这是一个操作数据+-库的mapper
 public interface UserMapper {
-    //按用户名单条查询
+    //按名单条查询
     @Select("select * from user where username = #{username}")
     User findUserByName(String username);
     //查询所有
@@ -18,7 +18,7 @@ public interface UserMapper {
     @Select("select * from user where userId = #{userId}")
     User getUser(int userId);
     //插入一条记录
-    //@Options(useGeneratedKeys = true,keyProperty = "id")
+    @Options(useGeneratedKeys = true,keyProperty = "userId")
     @Insert("insert into user(username,password) values (#{username},#{password})")
     int addUser(User user);
     //删除一条记录

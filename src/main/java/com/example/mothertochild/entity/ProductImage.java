@@ -1,26 +1,26 @@
 package com.example.mothertochild.entity;
 
 public class ProductImage {
-    private Integer id;
+    private Integer productImageId;
 
-    private Integer pid;
+    private Integer productId;
 
     private String type;
 
-    public Integer getId() {
-        return id;
+    public Integer getProductImageId() {
+        return productImageId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setProductImageId(Integer productImageId) {
+        this.productImageId = productImageId;
     }
 
-    public Integer getPid() {
-        return pid;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public String getType() {

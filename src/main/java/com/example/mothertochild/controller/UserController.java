@@ -2,25 +2,31 @@ package com.example.mothertochild.controller;
 
 import com.example.mothertochild.entity.User;
 import com.example.mothertochild.service.impl.UserServiceImpl;
+import com.example.mothertochild.util.DataUtils;
 import com.example.mothertochild.util.JsonResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
+@Api(value = "UserController-用户接口")
 @RestController
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
     @ApiOperation(value = "删除用户",notes = "根据id删除用户")
-    @DeleteMapping("/user/{id}")
-    @ApiImplicitParam(paramType = "query",name = "id",value = "用户ID",required = true,dataType = "int")
+    @PostMapping("/user/delete")
+    @ApiImplicitParam(name = "id",value = "用户ID",required = true,dataType = "String")
     //name是参数的名称，value是参数的说明
     // required true时是必传参数、false是选填参数，dataType是参数的类型，前端不是限制，仅做说明使用，
 //    paramType是指定参数放在哪个地方
@@ -29,8 +35,12 @@ public class UserController {
 //    path：（用于restful接口）-->请求参数的获取：@PathVariable
 //    body：（不常用）
 //    form（不常用）
-    public JsonResult deleteUser(@RequestParam int id) {
-        int row = userService.deleteUser(id);
+    public JsonResult deleteUser(@RequestBody String id) {
+        System.out.println("Id:"+ id);
+        //System.out.println("iii"+ Integer.valueOf(userId));
+        int userId =  DataUtils.getNumbers(id);
+        System.out.println("userId:" + userId);
+        int row = userService.deleteUser(userId);
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
@@ -40,7 +50,8 @@ public class UserController {
         return jsonResult;
     }
 
-    @PutMapping("/user")
+    //@PutMapping("/user")
+    @PostMapping("/user/updatePassword")
     @ApiOperation(value="修改用户密码", notes="根据用户id修改密码")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "id", value = "用户ID", required = true, dataType = "int"),
@@ -61,7 +72,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "新增一个用户")
-    @PostMapping("/user")
+    @PostMapping("/user/add")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query",name = "username",value = "用户名",required = true,dataType = "String"),
             @ApiImplicitParam(paramType = "query",name = "password",value = "用户密码",required = true,dataType = "String")
@@ -82,7 +93,7 @@ public class UserController {
 
 
     @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
-    @GetMapping("/user/{username}")
+    @GetMapping("/user/findUserByName")
     @ApiImplicitParam(paramType = "query",name = "username",value = "用户名",required = true,dataType = "String")
     public JsonResult  findUserByName( @RequestParam String username){
         System.out.println("username" + username);
@@ -97,7 +108,7 @@ public class UserController {
         return jsonResult;
     }
     @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user/findUserById")
     @ApiImplicitParam(paramType = "query",name = "userId",value = "用户id",required = true,dataType = "int")
     public JsonResult  getUser( @RequestParam int userId){
         User user = userService.getUser(userId);
