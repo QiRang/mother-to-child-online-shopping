@@ -19,7 +19,7 @@ public interface UserMapper {
     User getUser(int userId);
     //插入一条记录
     @Options(useGeneratedKeys = true,keyProperty = "userId")
-    @Insert("insert into user(username,password) values (#{username},#{password})")
+    @Insert("insert into user(username,password,phoneNumber,sex,birth,userImage) values (#{username},#{password},#{phoneNumber},#{sex},#{birth},#{userImage})")
     int addUser(User user);
     //删除一条记录
     @Delete("delete from user where userId = #{userId}")
@@ -27,5 +27,8 @@ public interface UserMapper {
     //更改密码
     @Update("update user set password = #{newPassword} where userId = #{userId} and password = #{password}")
     public int updatePassword(int userId, String password, String newPassword);
+    //更改头像
+    @Update("update user set userImage = #{userImage} where userId = #{userId}")
+    public int updateUserImage(int userId, String userImage);
 
 }

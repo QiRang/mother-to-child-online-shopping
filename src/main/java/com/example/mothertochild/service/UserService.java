@@ -13,5 +13,6 @@ public interface UserService {
     public Page<User> userList();
     public int updatePassword(int id,String password, String NewPassword);
     public int deleteUser(int id);
+    public int updateUserImage(int userId, String userImage);
 
 }

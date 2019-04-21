@@ -19,10 +19,10 @@ public class ProductController {
     @Autowired
     private ProductServiceImpl productService;
     @ApiOperation(value = "删除用户",notes = "根据id删除用户")
-    @DeleteMapping("/product/{productId}")
-    @ApiImplicitParam(paramType = "query",name = "id",value = "商品ID",required = true,dataType = "int")
-    public JsonResult deleteProduct(@RequestParam int id) {
-        int row = productService.deleteProduct(id);
+    @PostMapping("/product/delete")
+    public JsonResult deleteProduct(@RequestBody Product product) {
+        System.out.println("iiiiiiiiiiiiiiiiii"+ product.toString());
+        int row = productService.deleteProduct(product.getProductId());
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
@@ -32,14 +32,11 @@ public class ProductController {
         return jsonResult;
     }
 
-    @PatchMapping("/product")
-    @ApiOperation(value="修改用户密码", notes="根据商品id修改库存量")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "商品ID", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "stock", value = "商品库存量", required = true, dataType = "int"),
-    })
-    public JsonResult  updateProduct(@RequestParam(value="id") int id, @RequestParam(value="stock") int stock) {
-        int row = productService.updateStock(id,stock);
+    @PostMapping("/product/updateStock")
+    @ApiOperation(value="更新产品库存量", notes="根据商品id修改库存量")
+    public JsonResult  updateProduct(@RequestBody Product product) {
+        System.out.println("iiiiiiiiiiiiiiiiii"+ product.toString());
+        int row = productService.updateStock(product.getProductId(),product.getStock());
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
@@ -52,7 +49,6 @@ public class ProductController {
 @ApiOperation(value = "新增一个商品")
 @PostMapping("/product")
 public JsonResult insert(@RequestBody Product product) {
-    System.out.println("ppppppp" + product);
     //Product  product = new Product();
     System.out.println("iiiiiiiiiiiiiiiiii"+ product.toString());
     int row = productService.addProduct(product);
@@ -69,7 +65,7 @@ public JsonResult insert(@RequestBody Product product) {
 
 
     @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
-    @GetMapping("/product/{productName}")
+    @GetMapping("/product/findProductByName")
     @ApiImplicitParam(paramType = "query",name = "productName",value = "用户名",required = true,dataType = "String")
     public JsonResult  findProductByName( @RequestParam String productName){
         Product product = productService.findByName(productName);

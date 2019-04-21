@@ -44,4 +44,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.deleteUser(id);
     }
 
+    @Override
+    public int updateUserImage(int userId, String userImage) {
+        return userMapper.updateUserImage(userId,userImage);
+    }
 }
