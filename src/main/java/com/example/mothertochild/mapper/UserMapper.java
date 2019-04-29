@@ -30,5 +30,8 @@ public interface UserMapper {
     //更改头像
     @Update("update user set userImage = #{userImage} where userId = #{userId}")
     public int updateUserImage(int userId, String userImage);
+    //用户登陆
+    @Select("Select * from user  where username = #{username} and password = #{password}")
+    public User login(String username, String password);
 
 }

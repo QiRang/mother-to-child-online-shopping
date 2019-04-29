@@ -48,4 +48,9 @@ public class UserServiceImpl implements UserService {
     public int updateUserImage(int userId, String userImage) {
         return userMapper.updateUserImage(userId,userImage);
     }
+
+    @Override
+    public User login(String username, String password) {
+        return userMapper.login(username,password);
+    }
 }

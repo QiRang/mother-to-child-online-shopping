@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @Api(value = "UserController-用户接口")
 @RestController
 public class UserController {
@@ -79,6 +81,10 @@ public class UserController {
     @PostMapping("/user/add")
     public JsonResult insert(@RequestBody User user) {
         System.out.println("User:" + user.toString());
+        //设置默认的图片
+        if(user.getUserImage().equals("")){
+            user.setUserImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555836624398&di=82134ad9caa1b2f7ef51d00940bc109c&imgtype=0&src=http%3A%2F%2Fwww.ffpic.com%2Ffiles%2F2014%2F0829%2F14061323317269%2Fffpic1406134712250x13.png");
+        }
         int row = userService.addUser(user);
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
@@ -106,6 +112,7 @@ public class UserController {
         }
         return jsonResult;
     }
+
     @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
     @GetMapping("/user/findUserById")
     @ApiImplicitParam(paramType = "query",name = "userId",value = "用户id",required = true,dataType = "int")
@@ -128,6 +135,7 @@ public class UserController {
             @ApiImplicitParam(paramType = "query",name = "pageSize",value = "一页大小",required = true,dataType = "int")
     })
     public JsonResult getUserList(@RequestParam int pageNum, @RequestParam int pageSize){
+        System.out.println("pageNum:" + pageNum + "pageSize:" + pageSize);
         PageHelper.startPage(pageNum, pageSize);
         Page<User>  userList = userService.userList();
         JsonResult jsonResult = new JsonResult();
@@ -140,4 +148,24 @@ public class UserController {
         return jsonResult;
     }
 
+    @ApiOperation( value = "用户登陆",notes = "根据用户名和密码查找用户")
+    @GetMapping("/user/login")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query",name = "username",value = "用户名",required = true,dataType = "String"),
+            @ApiImplicitParam(paramType = "query",name = "password",value = "用户密码",required = true,dataType = "String")
+    })
+    public JsonResult  login(@RequestParam String username, @RequestParam String password){
+        System.out.println("哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"+ username+password);
+        User user = userService.login(username, password);
+        JsonResult jsonResult = new JsonResult();
+        if (user != null) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("登陆成功");
+            jsonResult.setValue(user);
+        } else {
+            jsonResult.setMessage("用户名或者密码错误");
+        }
+        System.out.println(jsonResult.getValue());
+        return jsonResult;
+    }
 }
