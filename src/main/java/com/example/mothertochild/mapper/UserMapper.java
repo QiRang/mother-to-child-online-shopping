@@ -4,8 +4,6 @@ import com.example.mothertochild.entity.User;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.*;
 
-import java.util.List;
-
 @Mapper //指定这是一个操作数据+-库的mapper
 public interface UserMapper {
     //按名单条查询
@@ -20,7 +18,7 @@ public interface UserMapper {
     //插入一条记录
     @Options(useGeneratedKeys = true,keyProperty = "userId")
     @Insert("insert into user(username,password,phoneNumber,sex,birth,userImage) values (#{username},#{password},#{phoneNumber},#{sex},#{birth},#{userImage})")
-    int addUser(User user);
+    int insertUser(User user);
     //删除一条记录
     @Delete("delete from user where userId = #{userId}")
     int deleteUser(int userId);

@@ -14,7 +14,7 @@ public interface OrderService {
     String finish = "finish";
     String delete = "delete";
 
-    int addOrder(Order order);
+    int insertOrder(Order order);
 
     int deleteOrder(int id);
 

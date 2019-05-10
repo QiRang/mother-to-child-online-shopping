@@ -4,9 +4,8 @@ package com.example.mothertochild.util;
 public class JsonResult {
     // 先默认一个状态码是失败
     private Integer code = 900;
-    private String success = "false";
     private String message = " ";
-    private Object value;
+    private Object value = "";
 
     public Integer getCode() {
         return code;
@@ -14,14 +13,6 @@ public class JsonResult {
 
     public void setCode(Integer code) {
         this.code = code;
-    }
-
-    public String getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(String success) {
-        this.success = success;
     }
 
     public String getMessage() {
@@ -42,14 +33,12 @@ public class JsonResult {
 
     public JsonResult(Integer code, String success, String message, Object value) {
         this.code = code;
-        this.success = success;
         this.message = message;
         this.value = value;
     }
 
     public JsonResult(Integer code, String success, String message) {
         this.code = code;
-        this.success = success;
         this.message = message;
     }
 

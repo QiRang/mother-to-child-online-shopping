@@ -12,8 +12,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-
 @Api(value = "UserController-用户接口")
 @RestController
 public class UserController {
@@ -37,13 +35,11 @@ public class UserController {
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
         }
         return jsonResult;
     }
 
-    //@PutMapping("/user")
     @PostMapping("/user/updatePassword")
     @ApiOperation(value="修改用户密码", notes="根据用户id修改密码")
     @ApiImplicitParams({
@@ -58,7 +54,6 @@ public class UserController {
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
         }
         return jsonResult;
@@ -71,7 +66,6 @@ public class UserController {
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
         }
         return jsonResult;
@@ -81,17 +75,19 @@ public class UserController {
     @PostMapping("/user/add")
     public JsonResult insert(@RequestBody User user) {
         System.out.println("User:" + user.toString());
-        //设置默认的图片
-        if(user.getUserImage().equals("")){
-            user.setUserImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555836624398&di=82134ad9caa1b2f7ef51d00940bc109c&imgtype=0&src=http%3A%2F%2Fwww.ffpic.com%2Ffiles%2F2014%2F0829%2F14061323317269%2Fffpic1406134712250x13.png");
-        }
-        int row = userService.addUser(user);
         JsonResult jsonResult = new JsonResult();
-        if (row > 0) {
-            jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
-            jsonResult.setMessage("成功");
-            jsonResult.setValue(user);
+        if(userService.findByName(user.getUsername())!= null){
+            jsonResult.setCode(1001);
+            jsonResult.setMessage("用户名被占用");
+        } else {
+            //设置默认的图片
+            user.setUserImage("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555836624398&di=82134ad9caa1b2f7ef51d00940bc109c&imgtype=0&src=http%3A%2F%2Fwww.ffpic.com%2Ffiles%2F2014%2F0829%2F14061323317269%2Fffpic1406134712250x13.png");
+                int row = userService.insetUser(user);
+            if ( row> 0) {
+                jsonResult.setCode(200);
+                jsonResult.setMessage("成功");
+                jsonResult.setValue(user);
+            }
         }
         return jsonResult;
     }
@@ -106,7 +102,6 @@ public class UserController {
         JsonResult jsonResult = new JsonResult();
         if (user != null) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
             jsonResult.setValue(user);
         }
@@ -121,7 +116,6 @@ public class UserController {
         JsonResult jsonResult = new JsonResult();
         if (user != null) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
             jsonResult.setValue(user);
         }
@@ -141,7 +135,6 @@ public class UserController {
         JsonResult jsonResult = new JsonResult();
         if (userList != null && userList.size() > 0) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
             jsonResult.setValue(userList);
         }

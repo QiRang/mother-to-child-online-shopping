@@ -12,13 +12,13 @@ public class Order {
 
     private String address;
 
-    private String post;
+//    private String post;
 
     private String receiver;
 
     private String mobile;
 
-    private String userMessage;
+//    private String userMessage;
 
     private Date createDate;
 
@@ -28,7 +28,7 @@ public class Order {
 
     private Date confirmDate;
 
-    private Integer userId;
+//    private Integer userId;
 
     private String status;
 
@@ -116,13 +116,13 @@ public class Order {
         this.address = address;
     }
 
-    public String getPost() {
-        return post;
-    }
-
-    public void setPost(String post) {
-        this.post = post;
-    }
+//    public String getPost() {
+//        return post;
+//    }
+//
+//    public void setPost(String post) {
+//        this.post = post;
+//    }
 
     public String getReceiver() {
         return receiver;
@@ -140,13 +140,13 @@ public class Order {
         this.mobile = mobile;
     }
 
-    public String getUserMessage() {
-        return userMessage;
-    }
-
-    public void setUserMessage(String userMessage) {
-        this.userMessage = userMessage;
-    }
+//    public String getUserMessage() {
+//        return userMessage;
+//    }
+//
+//    public void setUserMessage(String userMessage) {
+//        this.userMessage = userMessage;
+//    }
 
     public Date getCreateDate() {
         return createDate;
@@ -197,11 +197,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+//    public Integer getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Integer userId) {
+//        this.userId = userId;
+//    }
 }

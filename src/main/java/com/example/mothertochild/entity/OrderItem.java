@@ -14,7 +14,6 @@ public class OrderItem {
     //非数据库字段,订单项和产品是多对一关系，即一个产品可以对应多个订单项
     private Product product;
 
-
     public Product getProduct() {
         return product;
     }

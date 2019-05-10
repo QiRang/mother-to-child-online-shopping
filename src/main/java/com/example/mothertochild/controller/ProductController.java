@@ -1,5 +1,6 @@
 package com.example.mothertochild.controller;
 
+import com.example.mothertochild.entity.Category;
 import com.example.mothertochild.entity.Product;
 import com.example.mothertochild.service.impl.ProductServiceImpl;
 import com.example.mothertochild.util.JsonResult;
@@ -12,13 +13,16 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(value = "ProductController-商品接口")
 @RestController
 //@RestController 代替 @Controller,省略以后的 @ResponseBody
 public class ProductController {
     @Autowired
     private ProductServiceImpl productService;
-    @ApiOperation(value = "删除用户",notes = "根据id删除用户")
+
+    @ApiOperation(value = "删除产品",notes = "根据id删除产品")
     @PostMapping("/product/delete")
     public JsonResult deleteProduct(@RequestBody Product product) {
         System.out.println("iiiiiiiiiiiiiiiiii"+ product.toString());
@@ -26,7 +30,6 @@ public class ProductController {
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
         }
         return jsonResult;
@@ -40,58 +43,39 @@ public class ProductController {
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
         }
         return jsonResult;
     }
 
-@ApiOperation(value = "新增一个商品")
-@PostMapping("/product")
-public JsonResult insert(@RequestBody Product product) {
-    //Product  product = new Product();
-    System.out.println("iiiiiiiiiiiiiiiiii"+ product.toString());
-    int row = productService.addProduct(product);
-    JsonResult jsonResult = new JsonResult();
-    if (row > 0) {
-        jsonResult.setCode(200);
-        jsonResult.setSuccess("true");
-        jsonResult.setMessage("成功");
-        jsonResult.setValue(product);
+    @ApiOperation(value = "新增一个商品")
+    @PostMapping("/product")
+    public JsonResult insert(@RequestBody Product product) {
+        System.out.println("iiiiiiiiiiiiiiiiii"+ product.toString());
+        int row = productService.addProduct(product);
+        JsonResult jsonResult = new JsonResult();
+        if (row > 0) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(product);
+        }
+            return jsonResult;
     }
-        return jsonResult;
-    //return product.toString();
-}
 
 
-    @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
+    @ApiOperation( value = "查找商品",notes = "根据商品名查找商品")
     @GetMapping("/product/findProductByName")
-    @ApiImplicitParam(paramType = "query",name = "productName",value = "用户名",required = true,dataType = "String")
+    @ApiImplicitParam(paramType = "query",name = "productName",value = "商品名",required = true,dataType = "String")
     public JsonResult  findProductByName( @RequestParam String productName){
         Product product = productService.findByName(productName);
         JsonResult jsonResult = new JsonResult();
         if (product != null) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
             jsonResult.setValue(product);
         }
         return jsonResult;
     }
-//    @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
-//    @GetMapping("/user/{userId}")
-//    @ApiImplicitParam(paramType = "query",name = "userId",value = "用户id",required = true,dataType = "int")
-//    public JsonResult  getUser( @RequestParam int userId){
-//        User user = userService.getUser(userId);
-//        JsonResult jsonResult = new JsonResult();
-//        if (user != null) {
-//            jsonResult.setCode(200);
-//            jsonResult.setSuccess("true");
-//            jsonResult.setMessage("成功");
-//            jsonResult.setValue(user);
-//        }
-//        return jsonResult;
-//    }
 
     @ApiOperation(value = "分页查询")
     @GetMapping("/products")
@@ -105,11 +89,9 @@ public JsonResult insert(@RequestBody Product product) {
         JsonResult jsonResult = new JsonResult();
         if (productList != null && productList.size() > 0) {
             jsonResult.setCode(200);
-            jsonResult.setSuccess("true");
             jsonResult.setMessage("成功");
             jsonResult.setValue(productList);
         }
         return jsonResult;
     }
-
 }

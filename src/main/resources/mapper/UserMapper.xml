@@ -1,0 +1,41 @@
+
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+    <resultMap id="result" type="com.example.mothertochild.entity.User">
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+    </resultMap>
+
+    <select id="userList" resultMap="result">
+        SELECT * FROM user
+    </select>
+
+    <select id="findUserByName" resultMap="result">
+        SELECT * FROM user where username=#{username}
+    </select>
+
+    <insert id="insertUser" parameterType="com.example.mothertochild.entity.User"
+            keyProperty="userId" useGeneratedKeys="true">
+        INSERT INTO user
+        (
+            userId,username,password
+        )
+        VALUES (
+                   #{userId},
+                   #{username, jdbcType=VARCHAR},
+                   #{password, jdbcType=VARCHAR}
+               )
+    </insert>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from user where userId=#{userId}
+    </delete>
+
+    <update id="updatePassword" parameterType="com.example.mothertochild.entity.User">
+        update user set user.password=#{newPassword} where user.username=#{username} and user.password = #{password}
+    </update>
+
+</mapper>

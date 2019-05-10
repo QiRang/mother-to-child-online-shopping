@@ -28,10 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int addUser(User user) {
-        String q = user.getPassword();
-        System.out.println("password:" + q);
-        return userMapper.addUser(user);
+    public int insetUser(User user) {
+        return userMapper.insertUser(user);
     }
 
     @Override

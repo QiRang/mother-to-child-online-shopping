@@ -40,7 +40,7 @@ public class ACAFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         response.setHeader("Access-Control-Allow-Origin", "*");
-//        response.setHeader("Access-Control-Allow-Methods", "POST, GET");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET");
         response.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
         response.setHeader("Access-Control-Allow-Headers", ":x-requested-with,content-type");
         ((HttpServletResponse)servletResponse).setHeader("Access-Control-Allow-Origin", "*");

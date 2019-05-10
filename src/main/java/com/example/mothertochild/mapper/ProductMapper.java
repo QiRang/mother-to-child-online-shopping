@@ -4,8 +4,16 @@ import com.example.mothertochild.entity.Product;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface ProductMapper {
+
+    /**
+     * 根据类别id查询所有商品
+     */
+    @Select("SELECT * FROM product WHERE categoryId = #{categoryId}")
+    List<Product> findProductByCategoryId(int categoryId);
     //按名单条查询
     @Select("select * from product where productName = #{productName}")
     Product findProductByName(String productName);

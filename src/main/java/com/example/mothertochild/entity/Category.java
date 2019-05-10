@@ -1,37 +1,42 @@
 package com.example.mothertochild.entity;
 
+import java.util.List;
+
 public class Category {
-    public Category() {
-    }
-    public Category(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private int categoryId;
+    private String categoryName;
+    private List<Product> products;
 
-    private Integer id;
-    private String name;
-
-    public Integer getId() {
-        return id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
     public String toString() {
         return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
+                ", products=" + products +
                 '}';
     }
 }

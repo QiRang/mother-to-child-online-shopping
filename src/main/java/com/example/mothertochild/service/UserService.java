@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService {
     public User findByName(String username);
     public User getUser(int userId);
-    public int  addUser(User user);
+    public int  insetUser(User user);
     public Page<User> userList();
     public int updatePassword(int id,String password, String NewPassword);
     public int deleteUser(int id);

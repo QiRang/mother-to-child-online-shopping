@@ -7,10 +7,10 @@ import java.util.List;
 
 @Service
 public interface CategoryService {
-    List<Category> list();
-    int add(String name);
-    int delete(int id);
-    Category get(String name);
-    int update(int id , String name);
+    List<Category> categoryList();
+    int insertCategory(String categoryName);
+    int deleteCategory(int categoryId);
+    Category getCategory(String categoryName);
+    int updateCategory(int categoryId , String categoryName);
 
 }
