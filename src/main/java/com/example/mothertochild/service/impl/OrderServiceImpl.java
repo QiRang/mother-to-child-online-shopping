@@ -7,6 +7,7 @@ import com.example.mothertochild.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,6 +19,13 @@ public class OrderServiceImpl implements OrderService {
     public int insertOrder(Order order) {
         return orderMapper.insertOrder(order);
     }
+
+
+//    @Override
+//    public int insertOrder(Date createDate, String receiver, String mobile) {
+//        System.out.println("serviceImpl" + createDate + receiver + mobile);
+//        return orderMapper.insertOrder(createDate, receiver, mobile);
+//    }
 
     @Override
     public int deleteOrder(int orderId) {

@@ -20,8 +20,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProduct(int productId) {
-        return productMapper.getProduct(productId);
+    public Product findProductById(int productId) {
+        return productMapper.findProductById(productId);
     }
 
     @Override

@@ -8,17 +8,9 @@ import java.util.List;
 public class Order {
     private Integer orderId;
 
-    private String orderCode;
-
-    private String address;
-
-//    private String post;
-
     private String receiver;
 
     private String mobile;
-
-//    private String userMessage;
 
     private Date createDate;
 
@@ -28,43 +20,15 @@ public class Order {
 
     private Date confirmDate;
 
-//    private Integer userId;
+    private String status = "0";
 
-    private String status;
+    private String describe;
 
     //非数据库字段
     private List<OrderItem> orderItems;
     private User user;
     private float totalPrice;//总计金额
     private int totalNumber;//订单总数
-
-    //把对应的Status信息转换成中文
-    public String getStatusDesc() {
-        String desc = "未知";
-        switch (status) {
-            case OrderService.waitPay:
-                desc = "待付款";
-                break;
-            case OrderService.waitDelivery:
-                desc = "待发货";
-                break;
-            case OrderService.waitConfirm:
-                desc = "待收货";
-                break;
-            case OrderService.waitReview:
-                desc = "等评价";
-                break;
-            case OrderService.finish:
-                desc = "完成";
-                break;
-            case OrderService.delete:
-                desc = "刪除";
-                break;
-            default:
-                desc = "未知";
-        }
-        return desc;
-    }
 
     public List<OrderItem> getOrderItems() {
         return orderItems;
@@ -99,31 +63,6 @@ public class Order {
     }
 
 
-
-    public String getOrderCode() {
-        return orderCode;
-    }
-
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-//    public String getPost() {
-//        return post;
-//    }
-//
-//    public void setPost(String post) {
-//        this.post = post;
-//    }
-
     public String getReceiver() {
         return receiver;
     }
@@ -139,14 +78,6 @@ public class Order {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
-
-//    public String getUserMessage() {
-//        return userMessage;
-//    }
-//
-//    public void setUserMessage(String userMessage) {
-//        this.userMessage = userMessage;
-//    }
 
     public Date getCreateDate() {
         return createDate;
@@ -197,11 +128,31 @@ public class Order {
         this.orderId = orderId;
     }
 
-//    public Integer getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Integer userId) {
-//        this.userId = userId;
-//    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", receiver='" + receiver + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", createDate=" + createDate +
+                ", payDate=" + payDate +
+                ", deliveryDate=" + deliveryDate +
+                ", confirmDate=" + confirmDate +
+                ", status='" + status + '\'' +
+                ", describe='" + describe + '\'' +
+                ", orderItems=" + orderItems +
+                ", user=" + user +
+                ", totalPrice=" + totalPrice +
+                ", totalNumber=" + totalNumber +
+                '}';
+    }
 }

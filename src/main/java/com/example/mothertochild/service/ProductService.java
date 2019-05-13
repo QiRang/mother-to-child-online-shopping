@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductService {
     public Product findByName(String productName);
-    public Product getProduct(int productId);
+    public Product findProductById(int productId);
     public int  addProduct(Product product);
     public Page<Product> productList();
     public int updateStock(int productId,int stock);

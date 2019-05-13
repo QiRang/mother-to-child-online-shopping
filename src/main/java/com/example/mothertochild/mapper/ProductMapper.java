@@ -22,7 +22,7 @@ public interface ProductMapper {
     Page<Product> productList();
     //按id单条查询
     @Select("select * from product where productId = #{productId}")
-    Product getProduct(int productId);
+    Product findProductById(int productId);
     //插入一条记录
     @Options(useGeneratedKeys = true,keyProperty = "productId")
     @Insert("insert into product(categoryId,productName,price,stock,describes,productImage,createDate) values (#{categoryId},#{productName},#{price},#{stock},#{describe},#{productImage},#{createDate})")

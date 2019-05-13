@@ -72,7 +72,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "新增一个用户")
-    @PostMapping("/user/add")
+    @PostMapping("/user/insert")
     public JsonResult insert(@RequestBody User user) {
         System.out.println("User:" + user.toString());
         JsonResult jsonResult = new JsonResult();

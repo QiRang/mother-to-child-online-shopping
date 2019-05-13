@@ -1,7 +1,7 @@
 package com.example.mothertochild.entity;
 
 public class OrderItem {
-    private Integer id;
+    private Integer orderItemId;
 
     private Integer productId;
 
@@ -22,12 +22,12 @@ public class OrderItem {
         this.product = product;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getOrderItemId() {
+        return orderItemId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOrderItemId(Integer orderItemId) {
+        this.orderItemId = orderItemId;
     }
 
     public Integer getProductId() {

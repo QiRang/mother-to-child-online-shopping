@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     @ApiOperation(value = "新增一个商品")
-    @PostMapping("/product")
+    @PostMapping("/product/insert")
     public JsonResult insert(@RequestBody Product product) {
         System.out.println("iiiiiiiiiiiiiiiiii"+ product.toString());
         int row = productService.addProduct(product);

@@ -3,12 +3,10 @@ package com.example.mothertochild.entity;
 import io.swagger.annotations.ApiModel;
 
 import java.util.Date;
+import java.util.List;
 
 @ApiModel(value="商品对象模型")
 public class Product {
-
-    //非数据库字段,产品和分类是多对一
-    private Category category;
 
     //数据库字段
     private String productImage;
@@ -26,6 +24,18 @@ public class Product {
     private Integer categoryId;
 
     private Date createDate;
+
+    //非数据库字段,产品和分类是多对一
+    private Category category;
+    private List<OrderItem> orderItems;
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 
     public String getProductImage() {
         return productImage;
@@ -103,8 +113,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "category=" + category +
-                ", firstProductImage=" + productImage +
+                "productImage='" + productImage + '\'' +
                 ", productId=" + productId +
                 ", productName='" + productName + '\'' +
                 ", describe='" + describe + '\'' +
@@ -112,6 +121,8 @@ public class Product {
                 ", stock=" + stock +
                 ", categoryId=" + categoryId +
                 ", createDate=" + createDate +
+                ", category=" + category +
+                ", orderItems=" + orderItems +
                 '}';
     }
 }
