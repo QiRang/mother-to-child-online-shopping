@@ -2,6 +2,7 @@ package com.example.mothertochild.mapper;
 
 import com.example.mothertochild.entity.Category;
 import com.example.mothertochild.entity.Order;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ public interface OrderMapper {
             @Result(property = "orderItems",column = "orderId",
             many = @Many(select = "com.example.mothertochild.mapper.OrderItemMapper.findOrderItemByOrderId"))
     })
-    List<Order> orderList();
+    Page<Order> orderList();
     //查询结果无误，但是order的orderId属性丢失了,加上@Result(id=true,column="orderId",property="orderId")就可以了
 
     //查询单条记录

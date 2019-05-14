@@ -1,6 +1,8 @@
 package com.example.mothertochild.service;
 
 import com.example.mothertochild.entity.Order;
+import com.example.mothertochild.entity.Product;
+import com.github.pagehelper.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -24,6 +26,6 @@ public interface OrderService {
 
     Order getOrder(int id);
 
-    List orderList();
+    Page<Order> orderList();
 }
 

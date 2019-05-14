@@ -1,9 +1,11 @@
 package com.example.mothertochild.service.impl;
 
 import com.example.mothertochild.entity.Order;
+import com.example.mothertochild.entity.Product;
 import com.example.mothertochild.entity.User;
 import com.example.mothertochild.mapper.OrderMapper;
 import com.example.mothertochild.service.OrderService;
+import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List orderList() {
+    public Page<Order> orderList() {
         return orderMapper.orderList();
     }
 }

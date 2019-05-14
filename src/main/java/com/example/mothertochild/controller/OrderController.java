@@ -3,12 +3,14 @@ package com.example.mothertochild.controller;
 import com.example.mothertochild.entity.Order;
 import com.example.mothertochild.service.impl.OrderServiceImpl;
 import com.example.mothertochild.util.JsonResult;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -17,9 +19,15 @@ public class OrderController {
     private OrderServiceImpl orderService;
 
     @GetMapping("/orders")
-    public JsonResult orderList(){
+    @ApiOperation(value = "分页查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query",name = "pageNum",value = "当前页面",required = true,dataType = "int"),
+            @ApiImplicitParam(paramType = "query",name = "pageSize",value = "一页大小",required = true,dataType = "int")
+    })
+    public JsonResult orderList(@RequestParam int pageNum, @RequestParam int pageSize){
         JsonResult jsonResult = new JsonResult();
-        List<Order> orders = orderService.orderList();
+        PageHelper.startPage(pageNum, pageSize);
+        Page<Order> orders = orderService.orderList();
         if(orders != null && !orders.isEmpty()){
             jsonResult.setCode(200);
             jsonResult.setValue(orders);
