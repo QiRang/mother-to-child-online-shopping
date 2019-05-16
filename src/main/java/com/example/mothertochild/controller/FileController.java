@@ -11,11 +11,8 @@ import java.util.*;
 
 @RestController
 public class FileController {
-    //@Value("${web.upload-path}")
-//    private String filePath = "F:/Project/Images/mother-to-child/static/images/";
-    @PostMapping("user/userImageUpload")
+    @PostMapping("/fileUpload")
     public JsonResult userImagesUpload(MultipartFile file) {
-        List paths = new ArrayList();
         JsonResult jsonResult = new JsonResult();
         System.out.println("传输文件");
         if (Objects.isNull(file) || file.isEmpty()) {
@@ -28,12 +25,22 @@ public class FileController {
         //重新生成文件名
         fileName = UUID.randomUUID()+suffixName;
         //指定本地文件夹存储图片
+        //String filePath = "F:/Projects/IdeaProjects/mother-to-child/src/main/resources/static/images/";
+        String filePath = "F:/Projects/Images/mother-to-child/static/images/";
 
-        String filePath = "F:/Projects/IdeaProjects/mother-to-child/src/main/resources/static/images/";
+        //创建文件路径
+        File dest = new File(filePath + fileName);
+
+        // 检测是否存在目录
+        if (!dest.getParentFile().exists()) {
+            //假如文件不存在即重新创建新的文件已防止异常发生
+            dest.getParentFile().mkdirs();
+        }
         try {
             //将图片保存到static文件夹里
             file.transferTo(new File(filePath+fileName));
-            String path = "http://localhost:8081/static/images/" + fileName;
+            //String path = "http://localhost:8081/static/images/" + fileName;
+            String path = "http://localhost:8081/images/" + fileName;
             jsonResult.setCode(200);
             jsonResult.setMessage("上传成功");
             jsonResult.setValue(path);
@@ -45,39 +52,4 @@ public class FileController {
         return jsonResult;
     }
 
-    @PostMapping("/filesUpload")
-    public JsonResult imageUpload(MultipartFile[] files) {
-        List paths = new ArrayList();
-        String filePath = "F:/Projects/IdeaProjects/mother-to-child/src/main/resources/static/images/";
-        JsonResult jsonResult = new JsonResult();
-        System.out.println(files);
-        if(files != null && files.length >= 1 ){
-            for (int i=0;i<files.length;i++){
-                System.out.println("第"+i+"个文件名为:"+files[i].getName());
-                //获取文件名
-                String fileName = files[i].getOriginalFilename();
-                //获取文件后缀名
-                String suffixName = fileName.substring(fileName.lastIndexOf("."));
-                //重新生成文件名
-                fileName = UUID.randomUUID() + suffixName;
-                //指定本地文件夹存储图片
-                try {
-                    //将图片保存到static文件夹里
-                    files[i].transferTo(new File(filePath + fileName));
-                    System.out.println("value:" + jsonResult.getValue().toString());
-                    String path = "http://localhost:8081/static/images/" + fileName +"," + jsonResult.getValue().toString();
-                    System.out.println("path:" + path);
-                    paths.add(path);
-                    jsonResult.setCode(200);
-                    jsonResult.setMessage("上传成功");
-                    jsonResult.setValue(path);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-
-        return jsonResult;
-    }
 }

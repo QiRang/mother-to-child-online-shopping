@@ -8,10 +8,10 @@ import java.util.List;
 @Mapper
 public interface OrderItemMapper {
 
-    @Insert("INSERT INTO orderItem(productId,orderId,userId,number) values (#{productId},#{orderId},#{userId},#{number})")
+    @Insert("INSERT INTO orderitem(productId,orderId,userId,number) values (#{productId},#{orderId},#{userId},#{number})")
     int insetOrderItem(OrderItem orderItem);
 
-    @Select("select orderItemId,userId,number,productId from orderItem where orderId = #{orderId}")
+    @Select("select orderItemId,userId,number,productId from orderitem where orderId = #{orderId}")
     @Results({
             @Result(property = "product",column = "productId",
             one=@One(select = "com.example.mothertochild.mapper.ProductMapper.findProductById"))

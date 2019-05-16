@@ -12,4 +12,5 @@ public interface ProductService {
     public Page<Product> productList();
     public int updateStock(int productId,int stock);
     public int deleteProduct(int productId);
+    public int updateProductImages(int productId,String productImages);
 }

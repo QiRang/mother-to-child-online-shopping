@@ -33,4 +33,7 @@ public interface ProductMapper {
     //更改库存
     @Update("update product set stock = #{stock} where productId = #{productId}")
     public int updateStock(int productId,int stock);
+    //更改图片
+    @Update("update product set productImages=#{productImages} where productId = #{productId}")
+    public int updataProductImages(int productId,String productImages);
 }

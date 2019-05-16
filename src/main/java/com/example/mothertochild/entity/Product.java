@@ -9,7 +9,7 @@ import java.util.List;
 public class Product {
 
     //数据库字段
-    private String productImage;
+    private String productImages;
 
     private Integer productId;
 
@@ -37,12 +37,12 @@ public class Product {
         this.orderItems = orderItems;
     }
 
-    public String getProductImage() {
-        return productImage;
+    public String getProductImages() {
+        return productImages;
     }
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
+    public void setProductImages(String productImages) {
+        this.productImages = productImages;
     }
 
     public Category getCategory() {
@@ -113,7 +113,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "productImage='" + productImage + '\'' +
+                "productImages='" + productImages + '\'' +
                 ", productId=" + productId +
                 ", productName='" + productName + '\'' +
                 ", describe='" + describe + '\'' +

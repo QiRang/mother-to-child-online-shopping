@@ -48,6 +48,19 @@ public class ProductController {
         return jsonResult;
     }
 
+    @PostMapping("/product/updateProductImages")
+    @ApiOperation(value="更新产品库存量", notes="根据商品id修改库存量")
+    public JsonResult  updateProductImages(@RequestBody Product product) {
+        System.out.println("iiiiiiiiiiiiiiiiii"+ product.getProductImages());
+        int row = productService.updateProductImages(product.getProductId(),product.getProductImages());
+        JsonResult jsonResult = new JsonResult();
+        if (row > 0) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+        }
+        return jsonResult;
+    }
+
     @ApiOperation(value = "新增一个商品")
     @PostMapping("/product/insert")
     public JsonResult insert(@RequestBody Product product) {

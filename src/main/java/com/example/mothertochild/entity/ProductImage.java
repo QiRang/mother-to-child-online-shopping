@@ -1,11 +1,13 @@
 package com.example.mothertochild.entity;
 
+import java.util.List;
+
 public class ProductImage {
     private Integer productImageId;
 
     private Integer productId;
 
-    private String type;
+    //private String productImages;
 
     public Integer getProductImageId() {
         return productImageId;
@@ -23,11 +25,11 @@ public class ProductImage {
         this.productId = productId;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
+//    public List getProductImages() {
+//        return productImages;
+//    }
+//
+//    public void setProductImages(List productImages) {
+//        this.productImages = productImages;
+//    }
 }

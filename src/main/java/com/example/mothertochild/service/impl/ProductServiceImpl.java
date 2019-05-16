@@ -43,4 +43,9 @@ public class ProductServiceImpl implements ProductService {
     public int deleteProduct(int productId) {
         return productMapper.deleteProduct(productId);
     }
+
+    @Override
+    public int updateProductImages(int productId, String productImages) {
+        return productMapper.updataProductImages(productId,productImages);
+    }
 }
