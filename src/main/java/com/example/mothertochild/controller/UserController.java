@@ -108,6 +108,21 @@ public class UserController {
         return jsonResult;
     }
 
+//    @ApiOperation( value = "查找用户头像",notes = "根据用户名查找用户")
+//    @GetMapping("/user/findUserByName")
+//    @ApiImplicitParam(paramType = "query",name = "username",value = "用户名",required = true,dataType = "String")
+//    public JsonResult  findUserByName( @RequestParam String username){
+//        System.out.println("username" + username);
+//        User user = userService.findByName(username);
+//        JsonResult jsonResult = new JsonResult();
+//        if (user != null) {
+//            jsonResult.setCode(200);
+//            jsonResult.setMessage("成功");
+//            jsonResult.setValue(user);
+//        }
+//        return jsonResult;
+//    }
+
     @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
     @GetMapping("/user/findUserById")
     @ApiImplicitParam(paramType = "query",name = "userId",value = "用户id",required = true,dataType = "int")

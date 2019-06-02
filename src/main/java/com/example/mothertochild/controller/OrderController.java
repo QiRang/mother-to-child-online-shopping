@@ -28,6 +28,7 @@ public class OrderController {
         JsonResult jsonResult = new JsonResult();
         PageHelper.startPage(pageNum, pageSize);
         Page<Order> orders = orderService.orderList();
+
         if(orders != null && !orders.isEmpty()){
             jsonResult.setCode(200);
             jsonResult.setValue(orders);

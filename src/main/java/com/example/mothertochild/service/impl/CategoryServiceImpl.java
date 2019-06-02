@@ -3,6 +3,7 @@ package com.example.mothertochild.service.impl;
 import com.example.mothertochild.entity.Category;
 import com.example.mothertochild.mapper.CategoryMapper;
 import com.example.mothertochild.service.CategoryService;
+import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> categoryList() {
         return categoryMapper.categoryList();
+    }
+
+    @Override
+    public List<Category> categoryAndProductList() {
+        return categoryMapper.categoryAndProductList();
     }
 
     @Override
@@ -36,5 +42,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public int updateCategory(int categoryId, String categoryName) {
         return categoryMapper.updateCategory(categoryId,categoryName);
+    }
+
+    @Override
+    public Page<Category> categoryListWithPage() {
+        return categoryMapper.categoryListWithPage();
     }
 }

@@ -48,4 +48,5 @@ public class ProductServiceImpl implements ProductService {
     public int updateProductImages(int productId, String productImages) {
         return productMapper.updataProductImages(productId,productImages);
     }
+
 }

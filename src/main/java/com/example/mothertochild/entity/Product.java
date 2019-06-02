@@ -15,7 +15,7 @@ public class Product {
 
     private String productName;
 
-    private String describe;
+    private String describes;
 
     private Float price;
 
@@ -86,12 +86,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescribes() {
+        return describes;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescribes(String describes) {
+        this.describes = describes;
     }
 
     public Float getPrice() {
@@ -116,7 +116,7 @@ public class Product {
                 "productImages='" + productImages + '\'' +
                 ", productId=" + productId +
                 ", productName='" + productName + '\'' +
-                ", describe='" + describe + '\'' +
+                ", describes='" + describes + '\'' +
                 ", price=" + price +
                 ", stock=" + stock +
                 ", categoryId=" + categoryId +

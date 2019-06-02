@@ -3,6 +3,8 @@ package com.example.mothertochild.controller;
 import com.example.mothertochild.entity.Category;
 import com.example.mothertochild.service.impl.CategoryServiceImpl;
 import com.example.mothertochild.util.JsonResult;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -70,6 +72,29 @@ public class CategoryController {
             jsonResult.setCode(200);
             jsonResult.setMessage("成功");
             jsonResult.setValue(categoryLists);
+        }
+        return jsonResult;
+    }
+    @GetMapping("/category/product")
+    public JsonResult findCategoryAndProduct(){
+        JsonResult jsonResult= new JsonResult();
+        List<Category> categoryAndProductList = categoryService.categoryAndProductList();
+        if (categoryAndProductList != null && categoryAndProductList.size() > 0) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(categoryAndProductList);
+        }
+        return jsonResult;
+    }
+    @GetMapping("/category/page")
+    public JsonResult findCategoryWithPage(@RequestParam int pageNum, @RequestParam int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        Page<Category> productList = categoryService.categoryListWithPage();
+        JsonResult jsonResult = new JsonResult();
+        if (productList != null && productList.size() > 0) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(productList);
         }
         return jsonResult;
     }

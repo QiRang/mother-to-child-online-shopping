@@ -14,18 +14,24 @@ public interface ProductMapper {
      */
     @Select("SELECT * FROM product WHERE categoryId = #{categoryId}")
     List<Product> findProductByCategoryId(int categoryId);
+
     //按名单条查询
     @Select("select * from product where productName = #{productName}")
     Product findProductByName(String productName);
-    //查询所有
+
+    //查询所有,并查出每个商品所属的类别
     @Select("select * from product")
+    @Results({
+            @Result(property = "category",column = "categoryId",
+                    one = @One(select = "com.example.mothertochild.mapper.CategoryMapper.getCategoryById"))
+    })
     Page<Product> productList();
     //按id单条查询
     @Select("select * from product where productId = #{productId}")
     Product findProductById(int productId);
     //插入一条记录
     @Options(useGeneratedKeys = true,keyProperty = "productId")
-    @Insert("insert into product(categoryId,productName,price,stock,describes,productImage,createDate) values (#{categoryId},#{productName},#{price},#{stock},#{describe},#{productImage},#{createDate})")
+    @Insert("insert into product(categoryId,productName,price,stock,describes,productImages,createDate) values (#{categoryId},#{productName},#{price},#{stock},#{describe},#{productImages},#{createDate})")
     int addProduct(Product product);
     //删除一条记录
     @Delete("delete from product where productId = #{productId}")
