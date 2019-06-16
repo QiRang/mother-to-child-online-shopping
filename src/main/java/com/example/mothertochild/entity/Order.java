@@ -23,6 +23,7 @@ public class Order {
     private String status = "0";
 
     private String describe;
+    private String address;
 
     //非数据库字段
     private List<OrderItem> orderItems;
@@ -135,6 +136,14 @@ public class Order {
 
     public void setDescribe(String describe) {
         this.describe = describe;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

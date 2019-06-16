@@ -76,11 +76,25 @@ public class ProductController {
     }
 
 
-    @ApiOperation( value = "查找商品",notes = "根据商品名查找商品")
-    @GetMapping("/product/findProductByName")
-    @ApiImplicitParam(paramType = "query",name = "productName",value = "商品名",required = true,dataType = "String")
-    public JsonResult  findProductByName( @RequestParam String productName){
-        Product product = productService.findByName(productName);
+    @ApiOperation( value = "查找商品",notes = "根据商品类别查找商品")
+    @GetMapping("/product/findProductByCategoryId")
+    @ApiImplicitParam(paramType = "query",name = "categoryId",value = "类别Id",required = true,dataType = "int")
+    public JsonResult  findProductByName( @RequestParam int categoryId){
+        List<Product> productList = productService.findProdcutsByCategoryId(categoryId);
+        JsonResult jsonResult = new JsonResult();
+        if (productList != null) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(productList);
+        }
+        return jsonResult;
+    }
+
+    @ApiOperation( value = "查找商品",notes = "根据商品Id查找商品")
+    @GetMapping("/product/findProductById")
+    @ApiImplicitParam(paramType = "query",name = "productId",value = "商品Id",required = true,dataType = "int")
+    public JsonResult  findProductById( @RequestParam int productId){
+        Product product = productService.findProductById(productId);
         JsonResult jsonResult = new JsonResult();
         if (product != null) {
             jsonResult.setCode(200);
@@ -89,6 +103,7 @@ public class ProductController {
         }
         return jsonResult;
     }
+
 
     @ApiOperation(value = "分页查询")
     @GetMapping("/products")

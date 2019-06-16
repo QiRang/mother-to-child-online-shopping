@@ -4,9 +4,11 @@ import com.example.mothertochild.entity.Product;
 import com.github.pagehelper.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface ProductService {
-    public Product findByName(String productName);
+    public List<Product> findProdcutsByCategoryId(int categoryId);
     public Product findProductById(int productId);
     public int  addProduct(Product product);
     public Page<Product> productList();

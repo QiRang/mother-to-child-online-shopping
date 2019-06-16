@@ -28,7 +28,7 @@ public interface OrderMapper {
     //插入一条记录
     @Options(useGeneratedKeys = true,keyProperty = "orderId")
 //    @Insert("insert into orders(createDate,describe,receiver,mobile) values (#{createDate},#{describe},#{receiver},#{mobile})")
-    @Insert("insert into orders(createDate,receiver,mobile) values (#{createDate},#{receiver},#{mobile})")
+    @Insert("insert into orders(createDate,receiver,mobile,address) values (#{createDate},#{receiver},#{mobile},#{address})")
     int insertOrder(Order order);
     //int insertOrder(Date createDate, String receiver, String mobile);
 

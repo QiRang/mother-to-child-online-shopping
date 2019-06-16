@@ -9,7 +9,7 @@ public class OrderItem {
 
     private Integer userId;
 
-    private Integer number;
+    private Integer count;
 
     //非数据库字段,订单项和产品是多对一关系，即一个产品可以对应多个订单项
     private Product product;
@@ -54,11 +54,11 @@ public class OrderItem {
         this.userId = userId;
     }
 
-    public Integer getNumber() {
-        return number;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

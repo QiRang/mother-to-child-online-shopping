@@ -1,14 +1,17 @@
 package com.example.mothertochild.service.impl;
 
 import com.example.mothertochild.entity.Order;
+import com.example.mothertochild.entity.OrderItem;
 import com.example.mothertochild.entity.Product;
 import com.example.mothertochild.entity.User;
+import com.example.mothertochild.mapper.OrderItemMapper;
 import com.example.mothertochild.mapper.OrderMapper;
 import com.example.mothertochild.service.OrderService;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,18 +19,27 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private OrderItemMapper orderItemMapper;
 
     @Override
     public int insertOrder(Order order) {
-        return orderMapper.insertOrder(order);
+        List<OrderItem> orderItems = order.getOrderItems();
+        int flag = 1;
+        int row = orderMapper.insertOrder(order);
+        if(row > 0){
+            int orderId = order.getOrderId();
+            System.out.println("拿到id了吗？" + orderId);
+            for(OrderItem ele : orderItems){
+                ele.setOrderId(orderId);
+               int a = orderItemMapper.insetOrderItem(ele);
+               if(a < 1){
+                   flag = a;
+               }
+            }
+        }
+        return flag;
     }
-
-
-//    @Override
-//    public int insertOrder(Date createDate, String receiver, String mobile) {
-//        System.out.println("serviceImpl" + createDate + receiver + mobile);
-//        return orderMapper.insertOrder(createDate, receiver, mobile);
-//    }
 
     @Override
     public int deleteOrder(int orderId) {
@@ -46,6 +58,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<Order> orderList() {
-        return orderMapper.orderList();
+        Page<Order> orders = orderMapper.orderList();
+        for(Order ele : orders){
+            int orderId = ele.getOrderId();
+            System.out.println("拿到的orderId" + orderId);
+            List<OrderItem> orderItems = orderItemMapper.findOrderItemByOrderId(orderId);
+            ele.setOrderItems(orderItems);
+        }
+        return orders;
     }
 }
