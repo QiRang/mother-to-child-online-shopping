@@ -37,7 +37,7 @@ public class ProductController {
 
     @PostMapping("/product/updateStock")
     @ApiOperation(value="更新产品库存量", notes="根据商品id修改库存量")
-    public JsonResult  updateProduct(@RequestBody Product product) {
+    public JsonResult  updateStock(@RequestBody Product product) {
         System.out.println("iiiiiiiiiiiiiiiiii"+ product.toString());
         int row = productService.updateStock(product.getProductId(),product.getStock());
         JsonResult jsonResult = new JsonResult();
@@ -53,6 +53,19 @@ public class ProductController {
     public JsonResult  updateProductImages(@RequestBody Product product) {
         System.out.println("iiiiiiiiiiiiiiiiii"+ product.getProductImages());
         int row = productService.updateProductImages(product.getProductId(),product.getProductImages());
+        JsonResult jsonResult = new JsonResult();
+        if (row > 0) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+        }
+        return jsonResult;
+    }
+
+
+    @PostMapping("/product/update")
+    @ApiOperation(value="更新产品", notes="根据商品id更新产品")
+    public JsonResult  updateProduct(@RequestBody Product product) {
+        int row = productService.updateProduct(product);
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);

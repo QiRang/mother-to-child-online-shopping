@@ -26,7 +26,7 @@ public class Product {
     private Date createDate;
 
     //非数据库字段,产品和分类是多对一
-    private Category category;
+    private Category category = null;
     private List<OrderItem> orderItems;
 
     public List<OrderItem> getOrderItems() {
@@ -109,6 +109,8 @@ public class Product {
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
+
+
 
     @Override
     public String toString() {

@@ -25,8 +25,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public int insertCategory(String categoryName) {
-        return categoryMapper.insertCategory(categoryName);
+    public int insertCategory(Category category) {
+        return categoryMapper.insertCategory(category);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public int updateCategory(int categoryId, String categoryName) {
-        return categoryMapper.updateCategory(categoryId,categoryName);
+    public int updateCategory(Category category) {
+        return categoryMapper.updateCategory(category);
     }
 
     @Override

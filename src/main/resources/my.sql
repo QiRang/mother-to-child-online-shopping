@@ -23,7 +23,9 @@ CREATE TABLE `product` (
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `categoryId` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '类别主键',
-  `categoryName` varchar(255) COMMENT '类别名'
+  `categoryName` varchar(255) COMMENT '类别名',
+  `categoryIcon` varchar(255) comment '类别图标',
+  `createDate` datetime comment '创建时间'
 ) DEFAULT CHARSET=utf8 COMMENT='用户表';
 -- 订单表
 DROP TABLE IF EXISTS `orders`;

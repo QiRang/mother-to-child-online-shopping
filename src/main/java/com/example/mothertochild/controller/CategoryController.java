@@ -1,6 +1,7 @@
 package com.example.mothertochild.controller;
 
 import com.example.mothertochild.entity.Category;
+import com.example.mothertochild.entity.Product;
 import com.example.mothertochild.service.impl.CategoryServiceImpl;
 import com.example.mothertochild.util.JsonResult;
 import com.github.pagehelper.Page;
@@ -17,8 +18,8 @@ public class CategoryController {
     @Autowired
     private CategoryServiceImpl categoryService;
     @PostMapping("/category/delete")
-    public JsonResult deleteCategory(@RequestParam int categoryId) {
-        int row = categoryService.deleteCategory(categoryId);
+    public JsonResult deleteCategory(@RequestBody Category category) {
+        int row = categoryService.deleteCategory(category.getCategoryId());
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
@@ -28,15 +29,13 @@ public class CategoryController {
     }
 
     @PostMapping("/category/update")
-    @ApiOperation(value="修改商品类别", notes="根据id修改name")
+    @ApiOperation(value="修改商品类别", notes="根据id修改")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "categoryId", value = "categoryId", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "categoryName", value = "categoryName", required = true, dataType = "String")
+            @ApiImplicitParam(paramType = "body",name = "category",value = "商品类别",required = true,dataType = "object")
     })
-    public JsonResult  updateCategory(@RequestParam(value="categoryId") int categoryId,
-                                  @RequestParam(value="categoryName") String categoryName) {
-        System.out.println("categoryName:" + categoryName);
-        int row = categoryService.updateCategory(categoryId,categoryName);
+    public JsonResult  updateCategory(@RequestBody  Category category) {
+        System.out.println("category" + category.toString());
+        int row = categoryService.updateCategory(category);
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);
@@ -48,11 +47,12 @@ public class CategoryController {
     @ApiOperation(value = "新增一个商品类别")
     @PostMapping("/category/insert")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "body",name = "categoryName",value = "商品类别名",required = true,dataType = "String"),
+            @ApiImplicitParam(paramType = "body",name = "category",value = "商品类别",required = true,dataType = "object"),
     })
-    public JsonResult insert(@RequestBody String categoryName) {
-        System.out.println("categoryName:"+categoryName);
-        int row = categoryService.insertCategory(categoryName);
+    public JsonResult insert(@RequestBody  Category category) {
+
+        System.out.println("category:" + category.toString());
+        int row = categoryService.insertCategory(category);
         JsonResult jsonResult = new JsonResult();
         if (row > 0) {
             jsonResult.setCode(200);

@@ -1,10 +1,13 @@
 package com.example.mothertochild.entity;
 
+import java.util.Date;
 import java.util.List;
 
 public class Category {
     private Integer categoryId;
     private String categoryName;
+    private String categoryIcon;
+    private Date createDate;
     private List<Product> products;
 
     public Integer getCategoryId() {
@@ -31,12 +34,29 @@ public class Category {
         this.products = products;
     }
 
+    public String getCategoryIcon() {
+        return categoryIcon;
+    }
+
+    public void setCategoryIcon(String categoryIcon) {
+        this.categoryIcon = categoryIcon;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
                 "categoryId=" + categoryId +
                 ", categoryName='" + categoryName + '\'' +
-                ", products=" + products +
+                ", categoryIcon='" + categoryIcon + '\'' +
+                ", createDate=" + createDate +
                 '}';
     }
 }

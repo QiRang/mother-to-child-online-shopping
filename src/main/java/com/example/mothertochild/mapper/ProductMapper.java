@@ -31,7 +31,7 @@ public interface ProductMapper {
     Product findProductById(int productId);
     //插入一条记录
     @Options(useGeneratedKeys = true,keyProperty = "productId")
-    @Insert("insert into product(categoryId,productName,price,stock,describes,productImages,createDate) values (#{categoryId},#{productName},#{price},#{stock},#{describe},#{productImages},#{createDate})")
+    @Insert("insert into product(categoryId,productName,price,stock,describes,productImages,createDate) values (#{categoryId},#{productName},#{price},#{stock},#{describes},#{productImages},#{createDate})")
     int addProduct(Product product);
     //删除一条记录
     @Delete("delete from product where productId = #{productId}")
@@ -42,4 +42,8 @@ public interface ProductMapper {
     //更改图片
     @Update("update product set productImages=#{productImages} where productId = #{productId}")
     public int updataProductImages(int productId,String productImages);
+
+//    更新产品
+    @Update("update product set productName=#{productName},price= #{price},stock = #{stock},describes = #{describes} where productId = #{productId}")
+    public int updateProduct(Product product);
 }

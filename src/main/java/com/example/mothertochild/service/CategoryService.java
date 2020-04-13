@@ -10,10 +10,10 @@ import java.util.List;
 public interface CategoryService {
     List<Category> categoryList();
     List<Category> categoryAndProductList();
-    int insertCategory(String categoryName);
+    int insertCategory(Category category);
     int deleteCategory(int categoryId);
     Category getCategory(String categoryName);
-    int updateCategory(int categoryId , String categoryName);
+    int updateCategory(Category category);
     Page<Category> categoryListWithPage();
 
 }

@@ -39,16 +39,17 @@ public interface CategoryMapper {
     Category getCategoryById(String categoryId);
 
     //插入一条记录
-    //@Options(useGeneratedKeys = true,keyProperty = "categoryId")//加了这句以后报错
-    @Insert("insert into category(categoryName) values (#{categoryName})")
-    int insertCategory(String categoryName);
+    @Options(useGeneratedKeys = true,keyProperty = "categoryId")
+    @Insert("insert into category(categoryName,categoryIcon,createDate) values (#{categoryName},#{categoryIcon},#{createDate})")
+    int insertCategory(Category category);
 
     //删除一条记录
     @Delete("delete from category where categoryId = #{categoryId}")
     int deleteCategory(int categoryId);
 
     //更改
-    @Update("update category set categoryName= #{categoryName} where categoryId = #{categoryId}")
-    public int updateCategory(int categoryId,  String categoryName);
+    @Options(useGeneratedKeys = true,keyProperty = "categoryId")
+    @Update("update category set categoryName= #{categoryName},categoryIcon = #{categoryIcon} where categoryId = #{categoryId}")
+    public int updateCategory(Category category);
 
 }

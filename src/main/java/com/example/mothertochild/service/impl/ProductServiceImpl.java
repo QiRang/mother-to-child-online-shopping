@@ -51,4 +51,8 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.updataProductImages(productId,productImages);
     }
 
+    @Override
+    public int updateProduct(Product product) {
+        return productMapper.updateProduct(product);
+    }
 }

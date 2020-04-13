@@ -3,6 +3,7 @@ package com.example.mothertochild.controller;
 import com.example.mothertochild.entity.User;
 import com.example.mothertochild.service.impl.UserServiceImpl;
 import com.example.mothertochild.util.JsonResult;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
@@ -10,7 +11,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @Api(value = "UserController-用户接口")
 @RestController
@@ -43,15 +47,22 @@ public class UserController {
     @PostMapping("/user/updatePassword")
     @ApiOperation(value="修改用户密码", notes="根据用户id修改密码")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "用户ID", required = true, dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "userId", value = "用户ID", required = true, dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "password", value = "旧密码", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "newPassword", value = "新密码", required = true, dataType = "String")
     })
-    public JsonResult  updatePassword(@RequestParam(value="id") int id, @RequestParam(value="password") String password,
-                                 @RequestParam(value="newPassword") String newPassword) {
-        System.out.println("newPassword:" + newPassword);
-        int row = userService.updatePassword(id,password,newPassword);
+    public JsonResult  updatePassword(@RequestBody HashMap<String, String> map) {
+//        @RequestParam(value="userId") int userId, @RequestParam(value="password") String password,
+//        @RequestParam(value="newPassword") String newPassword
+//        System.out.println("userId:" + userId);
+//        int row = userService.updatePassword(userId,password,newPassword);
+        int userId = Integer.valueOf( map.get("userId"));
+        String newPassword = map.get("newPassword");
+        String password = map.get("password");
+        System.out.println(map.toString());
         JsonResult jsonResult = new JsonResult();
+//        int row = 1;
+        int row = userService.updatePassword(userId,password,newPassword);
         if (row > 0) {
             jsonResult.setCode(200);
             jsonResult.setMessage("成功");
