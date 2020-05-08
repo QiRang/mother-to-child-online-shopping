@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Order {
     private Integer orderId;
+    private Integer userId;
 
     private String receiver;
 
@@ -22,8 +23,15 @@ public class Order {
 
     private String status = "0";
 
-    private String describe;
+    private String describes;
     private String address;
+
+    private String height;
+    private String weight;
+    private String shoulder;
+    private String bust;
+    private String waist;
+    private String hipline;
 
     //非数据库字段
     private List<OrderItem> orderItems;
@@ -130,12 +138,12 @@ public class Order {
     }
 
 
-    public String getDescribe() {
-        return describe;
+    public String getDescribes() {
+        return describes;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescribes(String describes) {
+        this.describes = describes;
     }
 
     public String getAddress() {
@@ -146,10 +154,67 @@ public class Order {
         this.address = address;
     }
 
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getShoulder() {
+        return shoulder;
+    }
+
+    public void setShoulder(String shoulder) {
+        this.shoulder = shoulder;
+    }
+
+    public String getBust() {
+        return bust;
+    }
+
+    public void setBust(String bust) {
+        this.bust = bust;
+    }
+
+    public String getWaist() {
+        return waist;
+    }
+
+    public void setWaist(String waist) {
+        this.waist = waist;
+    }
+
+    public String getHipline() {
+        return hipline;
+    }
+
+    public void setHipline(String hipline) {
+        this.hipline = hipline;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
+                "userId=" + userId +
                 ", receiver='" + receiver + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", createDate=" + createDate +
@@ -157,7 +222,14 @@ public class Order {
                 ", deliveryDate=" + deliveryDate +
                 ", confirmDate=" + confirmDate +
                 ", status='" + status + '\'' +
-                ", describe='" + describe + '\'' +
+                ", describes='" + describes + '\'' +
+                ", address='" + address + '\'' +
+                ", height='" + height + '\'' +
+                ", weight='" + weight + '\'' +
+                ", shoulder='" + shoulder + '\'' +
+                ", bust='" + bust + '\'' +
+                ", waist='" + waist + '\'' +
+                ", hipline='" + hipline + '\'' +
                 ", orderItems=" + orderItems +
                 ", user=" + user +
                 ", totalPrice=" + totalPrice +

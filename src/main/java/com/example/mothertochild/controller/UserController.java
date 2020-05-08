@@ -1,6 +1,8 @@
 package com.example.mothertochild.controller;
 
+import com.example.mothertochild.entity.Order;
 import com.example.mothertochild.entity.User;
+import com.example.mothertochild.service.impl.OrderServiceImpl;
 import com.example.mothertochild.service.impl.UserServiceImpl;
 import com.example.mothertochild.util.JsonResult;
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -15,6 +17,7 @@ import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Api(value = "UserController-用户接口")
 @RestController
@@ -134,12 +137,13 @@ public class UserController {
 //        return jsonResult;
 //    }
 
-    @ApiOperation( value = "查找用户",notes = "根据用户名查找用户")
+    @ApiOperation( value = "查找用户",notes = "根据用户Id查找用户")
     @GetMapping("/user/findUserById")
     @ApiImplicitParam(paramType = "query",name = "userId",value = "用户id",required = true,dataType = "int")
     public JsonResult  getUser( @RequestParam int userId){
         User user = userService.getUser(userId);
         JsonResult jsonResult = new JsonResult();
+        System.out.println(user.toString());
         if (user != null) {
             jsonResult.setCode(200);
             jsonResult.setMessage("成功");
@@ -147,6 +151,7 @@ public class UserController {
         }
         return jsonResult;
     }
+
 
     @ApiOperation(value = "分页查询")
     @GetMapping("/users")

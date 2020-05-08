@@ -27,5 +27,7 @@ public interface OrderService {
     Order getOrder(int id);
 
     Page<Order> orderList();
+
+    List<Order> getUserOrder(int userId);
 }
 

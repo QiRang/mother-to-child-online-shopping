@@ -52,4 +52,21 @@ public class OrderController {
         return jsonResult;
     }
 
+    //    /user/findOrderByUserId
+    @ApiOperation( value = "查找用户订单",notes = "根据用户Id查找用户订单")
+    @GetMapping("/order/findOrderByUserId")
+    @ApiImplicitParam(paramType = "query",name = "userId",value = "用户id",required = true,dataType = "int")
+    public JsonResult  getUserOrder( @RequestParam int userId) {
+        System.out.println("--------------------------"+ userId);
+        List<Order> orders = orderService.getUserOrder(userId);
+        JsonResult jsonResult = new JsonResult();
+        System.out.println(orders.toString());
+        if (orders != null) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(orders);
+        }
+        return jsonResult;
+    }
+
 }

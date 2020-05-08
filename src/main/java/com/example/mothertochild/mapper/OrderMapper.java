@@ -28,12 +28,21 @@ public interface OrderMapper {
     //插入一条记录
     @Options(useGeneratedKeys = true,keyProperty = "orderId")
 //    @Insert("insert into orders(createDate,describe,receiver,mobile) values (#{createDate},#{describe},#{receiver},#{mobile})")
-    @Insert("insert into orders(createDate,receiver,mobile,address) values (#{createDate},#{receiver},#{mobile},#{address})")
+    @Insert({"insert into orders(createDate,userId,describes,receiver,mobile,address,height, weight,shoulder,bust,waist,hipline)" +
+            "values (#{createDate},#{userId},#{describes},#{receiver},#{mobile},#{address},#{height},#{weight},#{shoulder},#{bust},#{waist},#{hipline})"})
     int insertOrder(Order order);
     //int insertOrder(Date createDate, String receiver, String mobile);
 
     //删除一条记录
     @Delete("delete from orders where orderId = #{orderId}")
     int deleteOrder(int orderId);
+
+    @Select("select * from orders where userId = #{userId}")
+    @Results({
+            @Result(id=true,column="orderId",property="orderId"),
+            @Result(property = "orderItems",column = "orderId",
+                    many = @Many(select = "com.example.mothertochild.mapper.OrderItemMapper.findOrderItemByOrderId"))
+    })
+    List<Order> getUserOrder(int userId);
 
 }

@@ -1,6 +1,7 @@
 package com.example.mothertochild.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Integer userId;
@@ -14,6 +15,7 @@ public class User {
     private Date birth;//出生日期
     private String phoneNumber;
 
+    private List<Order> orders;
 
     public User() {
     }
@@ -77,6 +79,14 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override

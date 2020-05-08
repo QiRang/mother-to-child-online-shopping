@@ -1,5 +1,6 @@
 package com.example.mothertochild.service.impl;
 
+import com.example.mothertochild.entity.Order;
 import com.example.mothertochild.entity.User;
 import com.example.mothertochild.mapper.UserMapper;
 import com.example.mothertochild.service.UserService;
@@ -19,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(int userId) {
-        return null;
+        return userMapper.getUser(userId);
     }
 
     @Override

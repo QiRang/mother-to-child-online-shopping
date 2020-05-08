@@ -1,8 +1,11 @@
 package com.example.mothertochild.mapper;
 
+import com.example.mothertochild.entity.Order;
 import com.example.mothertochild.entity.User;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper //指定这是一个操作数据+-库的mapper
 public interface UserMapper {
@@ -31,5 +34,6 @@ public interface UserMapper {
     //用户登陆
     @Select("Select * from user  where username = #{username} and password = #{password}")
     public User login(String username, String password);
+
 
 }

@@ -25,6 +25,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int insertOrder(Order order) {
         List<OrderItem> orderItems = order.getOrderItems();
+        System.out.println("orderItem:---------------------------------------");
+        System.out.println(orderItems.toString());
         int flag = 1;
         int row = orderMapper.insertOrder(order);
         if(row > 0){
@@ -66,5 +68,10 @@ public class OrderServiceImpl implements OrderService {
             ele.setOrderItems(orderItems);
         }
         return orders;
+    }
+
+    @Override
+    public List<Order> getUserOrder(int userId) {
+        return orderMapper.getUserOrder(userId);
     }
 }
