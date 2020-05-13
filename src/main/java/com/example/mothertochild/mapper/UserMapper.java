@@ -13,7 +13,7 @@ public interface UserMapper {
     @Select("select * from user where username = #{username}")
     User findUserByName(String username);
     //查询所有
-    @Select("select * from user")
+    @Select("select * from user order by userId desc")
     Page<User> userList();
     //按id单条查询
     @Select("select * from user where userId = #{userId}")

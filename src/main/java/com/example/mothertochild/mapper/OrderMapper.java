@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
     //查询所有
-    @Select("select * from orders")
+    @Select("select * from orders order by orderId desc")
     @Results({
             @Result(id=true,column="orderId",property="orderId"),
             @Result(property = "orderItems",column = "orderId",
@@ -37,12 +37,20 @@ public interface OrderMapper {
     @Delete("delete from orders where orderId = #{orderId}")
     int deleteOrder(int orderId);
 
-    @Select("select * from orders where userId = #{userId}")
+    @Select("select * from orders where userId = #{userId} order by orderId desc")
     @Results({
             @Result(id=true,column="orderId",property="orderId"),
             @Result(property = "orderItems",column = "orderId",
                     many = @Many(select = "com.example.mothertochild.mapper.OrderItemMapper.findOrderItemByOrderId"))
     })
     List<Order> getUserOrder(int userId);
+
+    @Select("select * from orders where orderId = #{orderId}")
+    @Results({
+            @Result(id=true,column="orderId",property="orderId"),
+            @Result(property = "orderItems",column = "orderId",
+                    many = @Many(select = "com.example.mothertochild.mapper.OrderItemMapper.findOrderItemByOrderId"))
+    })
+    Order getUserOrderByOrderId(int orderId);
 
 }

@@ -74,4 +74,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getUserOrder(int userId) {
         return orderMapper.getUserOrder(userId);
     }
+
+    @Override
+    public Order getUserOrderByOrderId(int orderId) {
+        return orderMapper.getUserOrderByOrderId(orderId);
+    }
 }

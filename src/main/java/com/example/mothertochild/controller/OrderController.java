@@ -69,4 +69,21 @@ public class OrderController {
         return jsonResult;
     }
 
+    @ApiOperation( value = "查找用户订单",notes = "根据订单Id查找用户订单")
+    @GetMapping("/order/findOrderByOrderId")
+    @ApiImplicitParam(paramType = "query",name = "orderId",value = "订单id",required = true,dataType = "int")
+    public JsonResult  getUserOrderByOrderId( @RequestParam int orderId) {
+        System.out.println("--------------------------"+ orderId);
+        Order order = orderService.getUserOrderByOrderId(orderId);
+        JsonResult jsonResult = new JsonResult();
+        System.out.println(order.toString());
+        if (order != null) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(order);
+        }
+        return jsonResult;
+    }
+
+
 }

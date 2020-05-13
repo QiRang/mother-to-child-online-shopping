@@ -27,7 +27,7 @@ public interface CategoryMapper {
     })
     List<Category> categoryAndProductList();
     //按页查询
-    @Select("select * from category")
+    @Select("select * from category order by categoryId desc")
     Page<Category> categoryListWithPage();
 
     //查询单条记录

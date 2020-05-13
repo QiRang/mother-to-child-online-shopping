@@ -12,7 +12,7 @@ public interface ProductMapper {
     /**
      * 根据类别id查询所有商品
      */
-    @Select("SELECT * FROM product WHERE categoryId = #{categoryId}")
+    @Select("SELECT * FROM product WHERE categoryId = #{categoryId} order by productId desc")
     List<Product> findProductByCategoryId(int categoryId);
 
     //按名单条查询
@@ -20,7 +20,7 @@ public interface ProductMapper {
     Product findProductByName(String productName);
 
     //查询所有,并查出每个商品所属的类别
-    @Select("select * from product")
+    @Select("select * from product order by productId desc")
     @Results({
             @Result(property = "category",column = "categoryId",
                     one = @One(select = "com.example.mothertochild.mapper.CategoryMapper.getCategoryById"))
