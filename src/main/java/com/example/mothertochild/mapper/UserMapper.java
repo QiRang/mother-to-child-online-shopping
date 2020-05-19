@@ -35,5 +35,8 @@ public interface UserMapper {
     @Select("Select * from user  where username = #{username} and password = #{password}")
     public User login(String username, String password);
 
+    @Select("SELECT *  from user WHERE username LIKE CONCAT('%',#{username},'%') order by userId desc")
+    public List<User> searchUserList(String username);
+
 
 }

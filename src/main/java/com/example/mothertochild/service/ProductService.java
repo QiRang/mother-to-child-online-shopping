@@ -16,4 +16,6 @@ public interface ProductService {
     public int updateProduct(Product product);
     public int deleteProduct(int productId);
     public int updateProductImages(int productId,String productImages);
+
+    public List<Product> searchProductList(String productName);
 }

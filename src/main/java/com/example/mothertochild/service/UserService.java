@@ -16,5 +16,6 @@ public interface UserService {
     public int deleteUser(int id);
     public int updateUserImage(int userId, String userImage);
     public User login(String username, String password);
+    public List<User> searchUserList(String username);
 
 }

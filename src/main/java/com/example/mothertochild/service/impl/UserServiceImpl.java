@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService {
     public User login(String username, String password) {
         return userMapper.login(username,password);
     }
+
+    @Override
+    public List<User> searchUserList(String username) {
+        return userMapper.searchUserList(username);
+    }
 }

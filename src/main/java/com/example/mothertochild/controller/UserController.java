@@ -172,6 +172,23 @@ public class UserController {
         return jsonResult;
     }
 
+    @GetMapping("/search/users")
+    @ApiOperation(value = "检索查询用户")
+    @ApiImplicitParam(paramType = "query",name = "username",value = "用户名",required = true,dataType = "String")
+
+    public JsonResult searchCategoryList(@RequestParam String username){
+        JsonResult jsonResult = new JsonResult();
+        System.out.println("username"+  username);
+        List<User> users = userService.searchUserList(username);
+        System.out.println(users.toString());
+        if( users!= null && !users.isEmpty()){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(users);
+        }
+        return jsonResult;
+    }
+
     @ApiOperation( value = "用户登陆",notes = "根据用户名和密码查找用户")
     @GetMapping("/user/login")
     @ApiImplicitParams({

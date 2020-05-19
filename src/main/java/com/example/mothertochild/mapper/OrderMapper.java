@@ -21,6 +21,15 @@ public interface OrderMapper {
     Page<Order> orderList();
     //查询结果无误，但是order的orderId属性丢失了,加上@Result(id=true,column="orderId",property="orderId")就可以了
 
+//    检索
+    @Select("SELECT *  from orders WHERE receiver LIKE CONCAT('%',#{receiver},'%') and mobile LIKE CONCAT('%',#{mobile},'%') order by orderId desc")
+    @Results({
+            @Result(id=true,column="orderId",property="orderId"),
+            @Result(property = "orderItems",column = "orderId",
+                    many = @Many(select = "com.example.mothertochild.mapper.OrderItemMapper.findOrderItemByOrderId"))
+    })
+    List<Order> searchOderList(String receiver,String mobile);
+
     //查询单条记录
     @Select("select * from orders where orderId = #{orderId}")
     Order getOrder(int orderId);
@@ -52,5 +61,10 @@ public interface OrderMapper {
                     many = @Many(select = "com.example.mothertochild.mapper.OrderItemMapper.findOrderItemByOrderId"))
     })
     Order getUserOrderByOrderId(int orderId);
+
+//    更改订单状态
+    @Options(useGeneratedKeys = true,keyProperty = "orderId")
+    @Update("update orders set status = #{status} where orderId = #{orderId}")
+    int updateOrderStatus(Order order);
 
 }

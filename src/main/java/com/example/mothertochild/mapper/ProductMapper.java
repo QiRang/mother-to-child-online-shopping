@@ -26,6 +26,14 @@ public interface ProductMapper {
                     one = @One(select = "com.example.mothertochild.mapper.CategoryMapper.getCategoryById"))
     })
     Page<Product> productList();
+
+    @Select("SELECT *  from product WHERE productName LIKE CONCAT('%',#{productName},'%') order by productId desc")
+    @Results({
+            @Result(property = "category",column = "categoryId",
+                    one = @One(select = "com.example.mothertochild.mapper.CategoryMapper.getCategoryById"))
+    })
+    List<Product> searchProductList(String productName);
+
     //按id单条查询
     @Select("select * from product where productId = #{productId}")
     Product findProductById(int productId);

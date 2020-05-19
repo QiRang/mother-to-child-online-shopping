@@ -99,6 +99,22 @@ public class CategoryController {
         return jsonResult;
     }
 
+    @GetMapping("/search/categories")
+    @ApiOperation(value = "检索查询分类")
+    @ApiImplicitParam(paramType = "query",name = "categoryName",value = "类别名",required = true,dataType = "String")
+
+    public JsonResult searchCategoryList(@RequestParam String categoryName){
+        JsonResult jsonResult = new JsonResult();
+        System.out.println("categoryName"+  categoryName);
+        List<Category> categories = categoryService.searchCategoryList(categoryName);
+        if(categories != null && !categories.isEmpty()){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(categories);
+        }
+        return jsonResult;
+    }
+
     @ApiOperation( value = "查找商品类别",notes = "根据name查找商品类别")
     @GetMapping("/category/{categoryName}")
     @ApiImplicitParam(paramType = "query",name = "categoryName",value = "类别名",required = true,dataType = "String")

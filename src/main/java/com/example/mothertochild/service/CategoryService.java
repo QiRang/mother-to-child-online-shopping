@@ -15,5 +15,6 @@ public interface CategoryService {
     Category getCategory(String categoryName);
     int updateCategory(Category category);
     Page<Category> categoryListWithPage();
+    List<Category> searchCategoryList(String categoryName);
 
 }

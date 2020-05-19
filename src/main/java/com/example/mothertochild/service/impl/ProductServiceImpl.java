@@ -55,4 +55,9 @@ public class ProductServiceImpl implements ProductService {
     public int updateProduct(Product product) {
         return productMapper.updateProduct(product);
     }
+
+    @Override
+    public List<Product> searchProductList(String productName) {
+        return productMapper.searchProductList(productName);
+    }
 }

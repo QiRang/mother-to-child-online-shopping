@@ -30,6 +30,10 @@ public interface CategoryMapper {
     @Select("select * from category order by categoryId desc")
     Page<Category> categoryListWithPage();
 
+
+    @Select("SELECT *  from category WHERE categoryName LIKE CONCAT('%',#{categoryName},'%') order by categoryId desc")
+    List<Category> searchCategoryList(String categoryName);
+
     //查询单条记录
     @Select("select * from category where categoryName = #{categoryName}")
     Category getCategory(String categoryName);

@@ -54,6 +54,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public int updateOrderStatus(Order order) {
+        return orderMapper.updateOrderStatus(order);
+    }
+
+    @Override
     public Order getOrder(int orderId) {
         return orderMapper.getOrder(orderId);
     }
@@ -79,4 +84,11 @@ public class OrderServiceImpl implements OrderService {
     public Order getUserOrderByOrderId(int orderId) {
         return orderMapper.getUserOrderByOrderId(orderId);
     }
+
+    @Override
+    public List<Order> searchOrderList(String receiver, String mobile) {
+        return orderMapper.searchOderList(receiver,mobile);
+    }
+
+
 }

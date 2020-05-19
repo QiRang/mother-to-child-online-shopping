@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
 
@@ -31,6 +32,24 @@ public class OrderController {
 
         if(orders != null && !orders.isEmpty()){
             jsonResult.setCode(200);
+            jsonResult.setValue(orders);
+        }
+        return jsonResult;
+    }
+
+    @GetMapping("/search/orders")
+    @ApiOperation(value = "检索查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query",name = "receiver",value = "收件人",required = false,dataType = "String"),
+            @ApiImplicitParam(paramType = "query",name = "mobile",value = "收件人电话",required = false,dataType = "String")
+    })
+    public JsonResult searchOrderList(@RequestParam String receiver, @RequestParam String mobile){
+        JsonResult jsonResult = new JsonResult();
+        System.out.println("receiver"+ receiver + mobile);
+        List<Order> orders = orderService.searchOrderList(receiver, mobile);
+        if(orders != null && !orders.isEmpty()){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
             jsonResult.setValue(orders);
         }
         return jsonResult;
@@ -85,5 +104,33 @@ public class OrderController {
         return jsonResult;
     }
 
+
+    @ApiOperation(value = "删除异常订单",notes = "根据id删除异常产品")
+    @PostMapping("/order/delete")
+    public JsonResult deleteProduct(@RequestBody Order order) {
+        System.out.println("iiiiiiiiiiiiiiiiii"+ order.toString());
+        int row = orderService.deleteOrder(order.getOrderId());
+        JsonResult jsonResult = new JsonResult();
+        if (row > 0) {
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+        }
+        return jsonResult;
+    }
+
+    @PostMapping("/order/changeStatus")
+    @ApiOperation(value = "修改订单状态")
+    public JsonResult updateOrderStatus(@RequestBody Order order){
+        System.out.println("-----改订单状态--------"+order.toString());
+        JsonResult jsonResult = new JsonResult();
+        int row = orderService.updateOrderStatus(order);
+        if(row > 0){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(order);
+        }
+        //System.out.println(jsonResult.getValue());
+        return jsonResult;
+    }
 
 }

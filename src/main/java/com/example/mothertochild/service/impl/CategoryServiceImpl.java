@@ -48,4 +48,9 @@ public class CategoryServiceImpl implements CategoryService {
     public Page<Category> categoryListWithPage() {
         return categoryMapper.categoryListWithPage();
     }
+
+    @Override
+    public List<Category> searchCategoryList(String categoryName) {
+        return categoryMapper.searchCategoryList(categoryName);
+    }
 }

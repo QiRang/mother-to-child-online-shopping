@@ -23,6 +23,7 @@ public interface OrderService {
     int deleteOrder(int id);
 
     int updateOrder(Order order);
+    int updateOrderStatus(Order order);
 
     Order getOrder(int id);
 
@@ -30,5 +31,6 @@ public interface OrderService {
 
     List<Order> getUserOrder(int userId);
     Order getUserOrderByOrderId(int orderId);
+    List<Order> searchOrderList(String receiver, String mobile);
 }
 

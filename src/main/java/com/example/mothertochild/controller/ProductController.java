@@ -135,4 +135,20 @@ public class ProductController {
         }
         return jsonResult;
     }
+
+    @GetMapping("/search/products")
+    @ApiOperation(value = "检索查询商品")
+    @ApiImplicitParam(paramType = "query",name = "productName",value = "类别名",required = true,dataType = "String")
+
+    public JsonResult searchProductList(@RequestParam String productName){
+        JsonResult jsonResult = new JsonResult();
+        System.out.println("productName"+  productName);
+        List<Product> products = productService.searchProductList(productName);
+        if(products != null && !products.isEmpty()){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("成功");
+            jsonResult.setValue(products);
+        }
+        return jsonResult;
+    }
 }
